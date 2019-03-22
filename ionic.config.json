@@ -1,5 +1,7 @@
 {
   "name": "netwprkManagement",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
