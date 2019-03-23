@@ -8,18 +8,10 @@ import { Platform } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
-declare var navigator: { connection: { type: any } };
-declare var Connection: {
-  UNKNOWN: string | number;
-  ETHERNET: string | number;
-  WIFI: string | number;
-  CELL_2G: string | number;
-  CELL_3G: string | number;
-  CELL_4G: string | number;
-  CELL: string | number;
-  NONE: string | number;
-};
+declare var navigator;
+declare var Connection;
 
 @Component({
   selector: 'app-home',
@@ -29,13 +21,21 @@ declare var Connection: {
 export class HomePage {
   navigator: any;
   Connection: any;
+
+  address;
   constructor(
     private uid: Uid,
     private androidPermissions: AndroidPermissions,
     public alertController: AlertController,
     private inAppBrowser: InAppBrowser,
-    public plt: Platform
-  ) {}
+    public plt: Platform,
+    private router: Router
+  ) {
+    // this.address = this.getMAC().toString();
+    this.getMAC().then(data => {
+      this.address = data.toString();
+    });
+  }
 
   async getMAC() {
     const { hasPermission } = await this.androidPermissions.checkPermission(
@@ -55,15 +55,6 @@ export class HomePage {
       return;
     }
 
-    const alert = await this.alertController.create({
-      header: 'Your MAC address',
-
-      message: this.uid.MAC,
-      buttons: ['OK']
-    });
-
-    await alert.present();
-
     return this.uid.MAC;
   }
 
@@ -74,6 +65,19 @@ export class HomePage {
         header: 'Alert',
         subHeader: 'Your mac address',
         message: mac, // this.getMac()
+        buttons: ['OK']
+      });
+
+      await alert.present();
+    });
+  }
+
+  async dataUsage() {
+    this.plt.ready().then(async () => {
+      const usage = navigator.connection.type;
+      const alert = await this.alertController.create({
+        header: 'connection status',
+        subHeader: usage,
         buttons: ['OK']
       });
 
@@ -106,6 +110,10 @@ export class HomePage {
     });
   }
 
+  async ARPCall() {
+    await this.router.navigate(['/mac/' + this.address]);
+  }
+
   async login() {
     const target = '_blank';
     const options = { location: 'no' };
@@ -116,5 +124,13 @@ export class HomePage {
     setTimeout(() => {
       refLink.close();
     }, 10000);
+  }
+
+  macFilter() {
+    const target = '_blank';
+    const options = { location: 'no' };
+    const refLink = this.inAppBrowser.create('192.168.0.1', target);
+
+    refLink.show();
   }
 }

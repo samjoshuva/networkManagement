@@ -1,1 +1,29 @@
+ion-card:nth-child(even) {
 
+   background: rgba(255, 203, 181, 1);
+   background: -moz-linear-gradient(left, rgba(255, 203, 181, 1) 0%, rgba(224, 185, 255, 1) 100%);
+   background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255, 203, 181, 1)), color-stop(100%, rgba(224, 185, 255, 1)));
+   background: -webkit-linear-gradient(left, rgba(255, 203, 181, 1) 0%, rgba(224, 185, 255, 1) 100%);
+   background: -o-linear-gradient(left, rgba(255, 203, 181, 1) 0%, rgba(224, 185, 255, 1) 100%);
+   background: -ms-linear-gradient(left, rgba(255, 203, 181, 1) 0%, rgba(224, 185, 255, 1) 100%);
+   background: linear-gradient(to right, rgba(255, 203, 181, 1) 0%, rgba(224, 185, 255, 1) 100%);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffcbb5', endColorstr='#e0b9ff', GradientType=1);
+}
+
+ion-card:nth-child(odd) {
+   background: rgba(4, 255, 255, 1);
+   background: -moz-linear-gradient(left, rgba(4, 255, 255, 1) 0%, rgba(255, 44, 227, 1) 100%);
+   background: -webkit-gradient(left top, right top, color-stop(0%, rgba(4, 255, 255, 1)), color-stop(100%, rgba(255, 44, 227, 1)));
+   background: -webkit-linear-gradient(left, rgba(4, 255, 255, 1) 0%, rgba(255, 44, 227, 1) 100%);
+   background: -o-linear-gradient(left, rgba(4, 255, 255, 1) 0%, rgba(255, 44, 227, 1) 100%);
+   background: -ms-linear-gradient(left, rgba(4, 255, 255, 1) 0%, rgba(255, 44, 227, 1) 100%);
+   background: linear-gradient(to right, rgba(4, 255, 255, 1) 0%, rgba(255, 44, 227, 1) 100%);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#04ffff', endColorstr='#ff2ce3', GradientType=1);
+}
+
+ion-card {
+   width: 100% !important;
+   height: 20% !important;
+   border-radius: 25px !important;
+   color: white;
+}
